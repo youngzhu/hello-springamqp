@@ -1,6 +1,10 @@
 package com.youngzy.amqp.listener;
 
 import lombok.SneakyThrows;
+import org.springframework.amqp.core.ExchangeTypes;
+import org.springframework.amqp.rabbit.annotation.Exchange;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -39,5 +43,23 @@ public class SpringRabbitListener {
     @RabbitListener(queues = "queue.fanout2")
     public void listenFanoutQueue2(String msg) {
         System.out.println("---接收到queue.fanout2的消息：【" + msg + "】");
+    }
+
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "queue.direct1"),
+            exchange = @Exchange(name = "exchange.direct", type = ExchangeTypes.DIRECT),
+            key = {"red", "blue"}
+    ))
+    public void listenDirectQueue1(String msg) {
+        System.out.println("+++接收到queue.direct1的消息：【" + msg + "】");
+    }
+
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "queue.direct2"),
+            exchange = @Exchange(name = "exchange.direct", type = ExchangeTypes.DIRECT),
+            key = {"yellow", "blue"}
+    ))
+    public void listenDirectQueue2(String msg) {
+        System.out.println("---接收到queue.direct2的消息：【" + msg + "】");
     }
 }

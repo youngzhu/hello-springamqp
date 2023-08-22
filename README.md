@@ -27,3 +27,10 @@ WorkQueue模型：多个消费者监听一个队列；同一条消息只会被�
 
 ## v0.3.1-fanout
 Fanout Exchange，广播模式，将接收到的消息投递到每一个与其绑定的队列
+
+通过Bean注入的方式（FanoutConfig.java）来声明交换机、队列和绑定
+
+## v0.3.2-direct
+Direct Exchange，将接收到的消息按照规则（rule）分发到对应的队列，因此也称为路由（routes）模式
+
+通过注解来声明交换机、队列和绑定
