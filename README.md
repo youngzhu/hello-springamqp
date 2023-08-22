@@ -42,3 +42,14 @@ Topic Exchange，与 Direct Exchange类似，区别在于routingKey必须是多�
 #: 代指0个或多个单词
 *: 代指一个单词
 ```
+
+## v0.4.0
+消息转换器
+
+注入 MessageConverter 
+```java
+@Bean
+public MessageConverter messageConverter(){
+    return new Jackson2JsonMessageConverter();
+}
+```

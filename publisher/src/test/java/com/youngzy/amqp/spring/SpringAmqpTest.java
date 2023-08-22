@@ -77,7 +77,15 @@ public class SpringAmqpTest {
             });
         });
 
+    }
 
+    @Test
+    public void testSendObjectQueue() {
+        Map<String, Object> msg = new HashMap<>();
+        msg.put("name", "张三");
+        msg.put("age", 25);
+
+        rabbitTemplate.convertAndSend("queue.object", msg);
     }
 
 }
