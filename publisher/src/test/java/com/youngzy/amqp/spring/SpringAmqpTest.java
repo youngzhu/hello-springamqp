@@ -9,6 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringRunner.class)
@@ -53,6 +57,27 @@ public class SpringAmqpTest {
         routingKey = "yellow";
 
         rabbitTemplate.convertAndSend(exchange, routingKey, "hello, " + routingKey);
+    }
+
+    @Test
+    public void testSendTopicExchange() {
+        String exchange = "exchange.topic";
+
+        Map<String, List<String>> map = new HashMap<>();
+
+        map.put("china.news", Arrays.asList("中华人民共和国成立了！", "北京申奥成功了！"));
+        map.put("china.taiwan.news", Arrays.asList("台湾回归了！"));
+        map.put("china.weather", Arrays.asList("台风来了！", "入伏了！", "出伏了！"));
+        map.put("china.shanghai.weather", Arrays.asList("太热了！还暴雨！"));
+        map.put("usa.news", Arrays.asList("马斯克访华了！", "扎克伯格和马斯克干上了！", "美国换总统了！！"));
+
+        map.forEach((key, list) -> {
+            list.forEach((msg) -> {
+                rabbitTemplate.convertAndSend(exchange, key, msg);
+            });
+        });
+
+
     }
 
 }

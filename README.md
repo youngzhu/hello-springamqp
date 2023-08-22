@@ -34,3 +34,11 @@ Fanout Exchange，广播模式，将接收到的消息投递到每一个与其�
 Direct Exchange，将接收到的消息按照规则（rule）分发到对应的队列，因此也称为路由（routes）模式
 
 通过注解来声明交换机、队列和绑定
+
+## v0.3.3-topic
+Topic Exchange，与 Direct Exchange类似，区别在于routingKey必须是多个单词，以 `.` 分割
+
+```text
+#: 代指0个或多个单词
+*: 代指一个单词
+```
