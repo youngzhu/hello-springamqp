@@ -30,4 +30,14 @@ public class SpringRabbitListener {
 //        TimeUnit.MILLISECONDS.sleep(200);
         Thread.sleep(100);
     }
+
+    @RabbitListener(queues = "queue.fanout1")
+    public void listenFanoutQueue1(String msg) {
+        System.out.println("+++接收到queue.fanout1的消息：【" + msg + "】");
+    }
+
+    @RabbitListener(queues = "queue.fanout2")
+    public void listenFanoutQueue2(String msg) {
+        System.out.println("---接收到queue.fanout2的消息：【" + msg + "】");
+    }
 }
