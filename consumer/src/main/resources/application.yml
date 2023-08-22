@@ -10,4 +10,4 @@ spring:
     virtual-host: hello
     listener:
       simple:
-        prefetch: 1
+        prefetch: 1 # 每次预取的消息数量。消息都处理完，才进行下一次的获取
